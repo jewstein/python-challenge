@@ -1,7 +1,9 @@
 import csv
+from os import linesep
 import statistics
 
 #Variables
+can_list = []
 tot_votes = 0
 Khan_votes = 0
 Correy_votes = 0
@@ -40,45 +42,45 @@ def percent(OTooley_votes):
 
 
 with open("Resources/election_data.csv", 'r') as csvfile:
-    csvreader = csv.reader(csvfile, delimiter = ",")
+    csvreader = csv.reader(csvfile)
     header = next(csvreader)
 
     for row in csvreader:
-
         #Add months
         tot_votes = tot_votes + 1
 
-    if row in csvreader == "Khan":
-        Khan_votes = Khan_votes + 1
+        can_name = row[2]
 
-        # elif row in csvreader == "Correy":
-        #     Correy_votes = Correy_votes + 1
+        if row[2] in can_list:
+            # add 1 to vote count
+            can_votes[can_name] += 1
 
-        # elif row in csvreader == "Li":
-        #     Li_votes = Li_votes + 1
+        else
+            # add name to list
+            can_list.append(can_name)
+            can_votes[can_name] = 1
+
         
-        # elif row in csvreader == "O'Tooley":
-        #     OTooley_votes = OTooley_votes + 1
-
+            
 
 
     
 
     result.append('Election Results')
-    result.append('......................')
+    result.append('----------------------')
     result.append(f'Total Votes: ({tot_votes})')
-    result.append('......................')
+    result.append('----------------------')
     result.append(f'Khan: ({percent(Khan_votes)} {Khan_votes})')
     result.append(f'Correy: ({percent(Correy_votes)} {Correy_votes})')
     result.append(f'Li: ({percent(Li_votes)} {Li_votes})')
-    # result.append(f'"OTooley": ({percent(OTooley_votes)} {OTooley_votes})')
-    result.append('......................')
-    result.append(f'Winner: )')
+    result.append(f"'O'Tooley': ({percent(OTooley_votes)} {OTooley_votes})")
+    result.append('----------------------')
+    result.append(f'Winner: ( )')
+    result.append('----------------------')
+    
 
-    #Print
-    for item in result:
-        print(item)
-
-    # #Print results to "analysis" text:
-    # with open("analysis/results.txt", 'w') as text_file:
-    #     text_file.write( + "\n")
+    #Print results to "analysis" text:
+    with open("analysis/results.txt", 'w') as text_file:
+        for item in result:
+            print(item)
+            text_file.write(item + "\n")

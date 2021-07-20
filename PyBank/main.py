@@ -43,19 +43,18 @@ with open("Resources/budget_data.csv", 'r') as csvfile:
 
     result.append('Financial Analysis')
     result.append('......................')
-    result.append(f'Total Months: ({tot_months}')
+    result.append(f'Total Months: ({tot_months})')
     result.append(f'Total Profit/Loss: $ {nettotal_amount}')
     result.append(f'Average Change: $ {round(statistics.mean(pl_change),2)}')
     result.append(f'Greatest Increase in Profits: $ {great_inc[1]} ')
     result.append(f'Greatest Decrease in Profits: $ {great_dec[1]} ')
 
-    #Print
-    for item in result:
-        print(item)
 
     #Print results to "analysis" text:
     with open("analysis/results.txt", 'w') as text_file:
-        text_file.write(item + "\n")
+        for item in result:
+            print(item)
+            text_file.write(item + "\n")
 
 
 
